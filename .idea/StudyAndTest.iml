@@ -7,7 +7,8 @@
       <sourceFolder url="file://$MODULE_DIR$/rest-api-with-spring/src/main" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rest-api-with-spring/src/test" isTestSource="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.7.0" level="project" />
   </component>
 </module>
