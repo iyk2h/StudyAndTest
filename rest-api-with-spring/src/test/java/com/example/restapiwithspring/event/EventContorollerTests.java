@@ -1,13 +1,13 @@
 package com.example.restapiwithspring.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -17,13 +17,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-@ExtendWith(SpringExtension.class)
+@RunWith(SpringRunner.class)
 @WebMvcTest
 public class EventContorollerTests {
 
+    /**
+     * 참고로 MockMvc를 주입 받을 때 mvc에 빨간줄이 나올 수 있는데 신경 쓰지 않아도 된다.
+     * <p>
+     * 만약 시큐리티의 인증과 인가 설정이 안되어있는데 Security 또는 Oauth 라이브러리를 추가했다면 주석처리 해주자.
+     */
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
+
+
+//    @Test
+//    public void test() throws Exception {
+//        mockMvc.perform(post("/api/events/")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .accept(MediaTypes.HAL_JSON)
+//                )
+//                .andExpect(status().isCreated());
+//    }
+
 
     @Autowired
     ObjectMapper objectMapper;
@@ -46,11 +61,9 @@ public class EventContorollerTests {
         mockMvc.perform(post("/api/events/")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaTypes.HAL_JSON)
-                        .accept(objectMapper.writeValueAsString(event)))
+                        .content(objectMapper.writeValueAsString(event)))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("id").exists())
-        ;
+                .andExpect(jsonPath("id").exists());
     }
-
 }
