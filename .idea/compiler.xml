@@ -10,11 +10,13 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="resr-api-with-spring" target="11" />
       <module name="rest-api-with-spring" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="resr-api-with-spring" options="-parameters" />
       <module name="rest-api-with-spring" options="-parameters" />
     </option>
   </component>

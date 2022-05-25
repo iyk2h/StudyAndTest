@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/rest-api-with-spring" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rest-api-with-spring/src/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rest-api-with-spring/src/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
