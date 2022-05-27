@@ -20,6 +20,7 @@ public class EventResource extends RepresentationModel {
         this.event = event;
         this.add(linkTo(EventController.class).slash(event.getId()).withSelfRel());
         this.add(linkTo(EventController.class).withRel("query-events"));
+        this.add(Link.of("/docs/index.html#resources-events-create").withRel("profile"));
     }
 
     public Event getEvent() {

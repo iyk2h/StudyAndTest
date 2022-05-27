@@ -1,5 +1,7 @@
 package com.example.restapiwithspring.event;
 
+import com.example.restapiwithspring.common.ErrorResource;
+import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -31,12 +33,12 @@ public class EventController {
     @PostMapping
     public ResponseEntity creatEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
 
         eventValidator.validate(eventDto, errors);
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
 
         Event event = modelMapper.map(eventDto, Event.class);
@@ -48,5 +50,10 @@ public class EventController {
 //        eventResource.add(linkTo(EventController.class).withRel("query-events"));
         eventResource.add(selfLinkBuilder.withRel("update-event"));
         return ResponseEntity.created(createUri).body(eventResource);
+    }
+
+    @NotNull
+    private ResponseEntity<ErrorResource> badRequest(Errors errors) {
+        return ResponseEntity.badRequest().body(new ErrorResource(errors));
     }
 }
