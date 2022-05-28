@@ -1,28 +1,17 @@
 package com.example.restapiwithspring.event;
 
-import com.example.restapiwithspring.common.RestDocsConfiguration;
+import com.example.restapiwithspring.common.BaseControllerTest;
 import com.example.restapiwithspring.common.TestDescription;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.stream.IntStream;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
-import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -31,30 +20,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
-@ActiveProfiles("test")
-public class EventContorollerTests {
+
+public class EventContorollerTests extends BaseControllerTest {
 
     /**
      * 참고로 MockMvc를 주입 받을 때 mvc에 빨간줄이 나올 수 있는데 신경 쓰지 않아도 된다.
      * <p>
      * 만약 시큐리티의 인증과 인가 설정이 안되어있는데 Security 또는 Oauth 라이브러리를 추가했다면 주석처리 해주자.
      */
-    @Autowired
-    MockMvc mockMvc;
 
-    @Autowired
-    ObjectMapper objectMapper;
 
     @Autowired
     EventRepository eventRepository;
-
-    @Autowired
-    ModelMapper modelMapper;
 
     @Test
     @TestDescription("정상적으로 이벤트를 생성하는 테스트")
